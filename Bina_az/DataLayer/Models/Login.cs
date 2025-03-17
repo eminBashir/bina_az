@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Models
+namespace DataLayer.Models
 {
     public class Login
     {
