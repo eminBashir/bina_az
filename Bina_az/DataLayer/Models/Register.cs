@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Models
 {
-    public class Register
+    public class Register : BaseEntity
     {
         public string UserName { get; set; } = string.Empty;
         public string Email { get; init; } = string.Empty;
