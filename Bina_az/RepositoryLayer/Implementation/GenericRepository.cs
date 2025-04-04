@@ -41,5 +41,10 @@ namespace RepositoryLayer.Implementation
         {
             _dbSet.Remove(entity);
         }
+
+        public async Task<int> Save()
+        {
+           return await _context.SaveChangesAsync();
+        }
     }
 }

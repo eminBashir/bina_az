@@ -13,5 +13,6 @@ namespace RepositoryLayer.Interface
         Task<TEntity> GetById(int id);
         Task Update(TEntity entity);
         Task Delete(TEntity entity);
+        Task<int> Save();
     }
 }

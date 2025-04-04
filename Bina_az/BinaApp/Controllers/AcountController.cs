@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using DataLayer.Models;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using NuGet.Common;
 
 namespace BinaApp.Controllers
 {
@@ -14,11 +12,11 @@ namespace BinaApp.Controllers
     [ApiController]
     public class AcountController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
         private readonly IConfiguration _configuration;
 
-        public AcountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+        public AcountController(UserManager<User> userManager, RoleManager<Role> roleManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -27,7 +25,15 @@ namespace BinaApp.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] Register model)
         {
-            var user = new IdentityUser { UserName = model.UserName };
+
+           
+            var user = new User();
+            user.UserName = model.UserName;
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Password = model.Password;    
+            user.Email = model.Email;
+
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
@@ -35,6 +41,12 @@ namespace BinaApp.Controllers
                 return Ok(new { message = "User registered succesfully" });
             }
             return BadRequest(result.Errors);
+
+            if(await _roleManager.RoleExistsAsync("User"))
+            {
+                await _userManager.AddToRoleAsync(user, "User");
+            }
+            return Ok("Qeydiyyat ugurla tamamlandi");
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Login model)
@@ -68,7 +80,7 @@ namespace BinaApp.Controllers
         {
             if(!await _roleManager.RoleExistsAsync(role))
             {
-                var result = await _roleManager.CreateAsync(new IdentityRole(role));
+                var result = await _roleManager.CreateAsync(new Role());
 
                 if (result.Succeeded)
                 {
@@ -79,16 +91,16 @@ namespace BinaApp.Controllers
             return BadRequest("Role alredy exists");
         }
         [HttpPost("assign-role")]
-        public async Task<IActionResult> AssignRole([FromBody] UserRole model)
+        public async Task<IActionResult> AssignRole([FromBody] User model)
         {
-            var user = await _userManager.FindByNameAsync(model.UserName);
+            var user = await _userManager.FindByNameAsync(model.FirstName);
 
             if (user == null)
             {
                 return BadRequest("User not found");
             }
 
-            var result = await _userManager.AddToRoleAsync(user, model.Role);
+            var result = await _userManager.AddToRoleAsync(user, "User");
 
             if (result.Succeeded)
             {

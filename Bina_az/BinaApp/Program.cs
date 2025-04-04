@@ -1,11 +1,13 @@
-using Microsoft.EntityFrameworkCore;
-using System;
 using DataLayer.Data;
 using DataLayer.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using RepositoryLayer.Configuration;
+using DataLayer.Models;
+using BusinessLayer.Configuration;
+
 namespace BinaApp
 {
     public class Program
@@ -15,17 +17,20 @@ namespace BinaApp
             var builder = WebApplication.CreateBuilder(args);
             var services = builder.Services;
             var configuration = builder.Configuration;
-            // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<AppDbContext>(option =>
-            option.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            
+
+            services.AddAnnouncServiceConfig();
+            services.AddRepositoryConfig();
+            services.AddServices(configuration);
+            services.AddTransient<RoleSeeder>();
+
+            builder.Services.AddIdentity<User, Role>(options =>
             {
                 options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = true;
@@ -61,6 +66,13 @@ namespace BinaApp
             });
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var service = scope.ServiceProvider;
+                var roleSeeder = service.GetRequiredService<RoleSeeder>();  // RoleSeeder-i al?r?q
+               _ = roleSeeder.SeedRolesAsync();  // Rollar? avtomatik yarad?r?q
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
