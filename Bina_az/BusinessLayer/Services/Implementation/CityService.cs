@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.DTO;
+using BusinessLayer.DTO.CityDTO_s;
 using BusinessLayer.Services.Interfaces;
 using DataLayer.Models;
 using RepositoryLayer.Interface;
@@ -22,25 +23,61 @@ namespace BusinessLayer.Services.Implementation
             await _cityRepository.Create(entity);
             _ = await _cityRepository.Save();
         }
-
-        public void Delete(CityDTO cityDTO, int id)
+        public async Task<List<CityDTO>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var cities = await _cityRepository.GetAll();
+            var cityDtos = _mapper.Map<List<CityDTO>>(cities);
+            return cityDtos;
         }
 
-        public Task<List<City>> GetAllAsync()
+        public async Task<CityDTO> GetById(int id)
         {
-            throw new NotImplementedException();
+            var cityEntity = await _cityRepository.GetById(id);
+
+            if (cityEntity == null)
+            {
+                throw new Exception("City not found");
+            }
+
+            var cityDto = _mapper.Map<CityDTO>(cityEntity);
+            return cityDto;
         }
 
-        public Task<CityDTO> GetById(int id)
+        public async Task Update(CityDTO cityDTO, int id)
         {
-            throw new NotImplementedException();
+            var city = await _cityRepository.GetById(id);
+
+            if (city == null)
+            {
+                throw new Exception("City not found");
+            }
+            _mapper.Map(cityDTO, city);
+            await _cityRepository.Update(city,id);
+            await _cityRepository.Save();
         }
 
-        public void Update(CityDTO cityDTO, int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var city = await _cityRepository.GetById(id);
+
+            if(city == null)
+            {
+                throw new Exception("City not found");
+            }
+
+            await _cityRepository.Delete(city);
+            await _cityRepository.Save();
+        }
+
+        public async Task<CityWithRegionDTO> GetCityWithRegions(int id)
+        {
+            var city = await _cityRepository.GetCityWithRegions(id);
+
+            if(city == null)
+            {
+                throw new Exception("City not found");
+            }
+            return _mapper.Map<CityWithRegionDTO>(city);
         }
     }
 }

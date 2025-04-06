@@ -11,7 +11,7 @@ namespace RepositoryLayer.Interface
         Task Create(TEntity entity);
         Task<List<TEntity>> GetAll();
         Task<TEntity> GetById(int id);
-        Task Update(TEntity entity);
+        Task Update(TEntity entity,int id);
         Task Delete(TEntity entity);
         Task<int> Save();
     }

@@ -9,5 +9,6 @@ namespace RepositoryLayer.Interface
 {
     public interface IRegionRepository : IGenericRepository<Region>
     {
+        Task<List<Region>> GetAllWithCity();
     }
 }

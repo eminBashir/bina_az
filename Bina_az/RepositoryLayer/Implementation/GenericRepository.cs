@@ -33,7 +33,7 @@ namespace RepositoryLayer.Implementation
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task Update(TEntity entity)
+        public async Task Update(TEntity entity, int id)
         {
             _dbSet.Update(entity);
         }

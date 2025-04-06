@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using BusinessLayer.DTO;
+using BusinessLayer.DTO.CityDTO_s;
+using BusinessLayer.DTO.RegionDTO_s;
 using DataLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer.Mapper
 {
@@ -14,6 +11,10 @@ namespace BusinessLayer.Mapper
         public MapperProfile()
         {
             CreateMap<City, CityDTO>().ReverseMap();
+            CreateMap<City, CityWithRegionDTO>().ReverseMap();
+            CreateMap<Region, RegionCreateDTO>().ReverseMap();
+            CreateMap<Region, RegionGetDto>().ReverseMap();
+            CreateMap<Region, RegionDTO>().ReverseMap();
         }
     }
 }

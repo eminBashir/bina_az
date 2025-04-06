@@ -15,6 +15,7 @@ namespace BusinessLayer.Configuration
         public static void AddAnnouncServiceConfig(this IServiceCollection services)
         {
             services.AddScoped<ICityService,CityService>();
+            services.AddScoped<IRegionService,RegionService>();
             services.AddAutoMapper(typeof(MapperProfile));
         }
 

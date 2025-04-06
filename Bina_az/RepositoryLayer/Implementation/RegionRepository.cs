@@ -1,19 +1,24 @@
 ﻿using DataLayer.Data;
 using DataLayer.Models;
+using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RepositoryLayer.Implementation
 {
     public class RegionRepository : GenericRepository<Region>, IRegionRepository
     {
+        private readonly AppDbContext context;
+
         public RegionRepository(AppDbContext context) : base(context)
         {
-            
+            this.context = context;
+        }
+
+        public async Task<List<Region>> GetAllWithCity()
+        {
+            return await context.Regions
+                          .Include(r => r.City)
+                          .ToListAsync();
         }
     }
 }

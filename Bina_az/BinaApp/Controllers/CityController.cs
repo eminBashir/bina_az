@@ -12,7 +12,7 @@ namespace BinaApp.Controllers
 
         public CityController(ICityService cityService)
         {
-           _cityService = cityService;
+            _cityService = cityService;
         }
 
         [HttpPost]
@@ -21,5 +21,41 @@ namespace BinaApp.Controllers
             await _cityService.Create(cityDTO);
             return Ok(cityDTO);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _cityService.GetById(id);
+            return Ok(result);
+        }
+
+        [HttpGet("Get all")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _cityService.GetAllAsync();
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(CityDTO cityDTO, int id)
+        {
+            await _cityService.Update(cityDTO, id);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _cityService.Delete(id);
+            return NoContent();
+        }
+
+        [HttpGet("GetCityWithRegions/{id}")]
+        public async Task<IActionResult> GetCityWithRegions(int id)
+        {
+            var result = await _cityService.GetCityWithRegions(id);
+            return Ok(result);
+        }
+
     }
 }
