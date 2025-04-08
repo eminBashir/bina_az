@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Models
 {
-    public class Categories : BaseEntity
+    public class Category : BaseEntity
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public ICollection<Announcment> Announcments { get; set; }
     }
 }

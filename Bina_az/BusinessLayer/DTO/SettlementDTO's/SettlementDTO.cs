@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.DTO
+namespace BusinessLayer.DTO.SettlementDTO_s
 {
-    public class CityDTO
+    public class SettlementDTO
     {
-        public string Name { get; set; } = string.Empty;
+        public string Name {  get; set; } = string.Empty;
     }
 }

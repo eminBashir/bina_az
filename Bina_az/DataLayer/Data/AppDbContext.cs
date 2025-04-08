@@ -10,6 +10,8 @@ namespace DataLayer.Data
 
         public DbSet<City> Cities { get; set; }
         public DbSet<Region> Regions { get; set; }
+        public DbSet<Settlement> Settlements { get; set; }
+        public DbSet<Category> Categories { get; set; }
        
     }
 }

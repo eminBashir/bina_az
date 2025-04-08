@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace RepositoryLayer.Implementation
 {
-    public class CategoryRepository : GenericRepository<Categories> , ICategoryRepository
+    public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
     {
         public CategoryRepository(AppDbContext context) : base(context)
         {
-            
+
         }
     }
 }

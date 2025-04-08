@@ -14,11 +14,11 @@ namespace RepositoryLayer.Implementation
             this.context = context;
         }
 
-        public async Task<List<Region>> GetAllWithCity()
+        public async Task<Region> GetRegionSettlement(int id)
         {
             return await context.Regions
-                          .Include(r => r.City)
-                          .ToListAsync();
+                .Include(p => p.Settlements)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }

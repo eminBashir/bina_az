@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
-using BusinessLayer.DTO;
 using BusinessLayer.DTO.RegionDTO_s;
 using BusinessLayer.Services.Interfaces;
 using DataLayer.Models;
 using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer.Services.Implementation
 {
@@ -37,7 +31,7 @@ namespace BusinessLayer.Services.Implementation
             return regionDto;
         }
 
-        public async Task<RegionGetDto> GetById(int id)
+        public async Task<RegionDTO> GetById(int id)
         {
             var regionEntity = await _regionRepository.GetById(id);
 
@@ -46,7 +40,7 @@ namespace BusinessLayer.Services.Implementation
                 throw new Exception("Region not found");
             }
 
-            var regionDto = _mapper.Map<RegionGetDto>(regionEntity);
+            var regionDto = _mapper.Map<RegionDTO>(regionEntity);
             return regionDto;
         }
 
@@ -77,6 +71,16 @@ namespace BusinessLayer.Services.Implementation
             await _regionRepository.Save();
         }
 
+        public async Task<RegionSettlementsDTO> GetRegionSettlement(int id)
+        {
+            var region = await _regionRepository.GetRegionSettlement(id);
 
+            if (region == null)
+            {
+                throw new Exception("Region not found");
+            }
+
+            return _mapper.Map<RegionSettlementsDTO>(region);
+        }
     }
 }

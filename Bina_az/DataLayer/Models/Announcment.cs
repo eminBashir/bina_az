@@ -24,6 +24,7 @@ namespace DataLayer.Models
         public int CategoryID { get; set; }
         public int UserId { get; set; }
         public DateTime CreateDate { get; set; }
+        public Category Category { get; set; }
         public User User { get; set; }
         public ICollection<AnnouncmentImages> AnnoucmentImages { get; set; }
     }

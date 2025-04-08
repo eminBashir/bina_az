@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.DTO.RegionDTO_s
+namespace BusinessLayer.DTO.SettlementDTO_s
 {
-    public class RegionGetDto
+    public class SettlementCreateDTO
     {
         public string Name { get; set; } = string.Empty;
+        public int RegionId { get; set; }
     }
 }

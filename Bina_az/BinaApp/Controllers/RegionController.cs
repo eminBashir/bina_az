@@ -38,10 +38,17 @@ namespace BinaApp.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetRegionSettlements{id}")]
+        public async Task<IActionResult> GetRegionSettlement(int id)
+        {
+            var result = await regionService.GetRegionSettlement(id);
+            return Ok(result);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(RegionDTO regionDTO, int id)
         {
-            await regionService.Update(regionDTO,id);
+            await regionService.Update(regionDTO, id);
             return Ok(regionDTO);
         }
 

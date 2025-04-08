@@ -36,6 +36,13 @@ namespace BinaApp.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetCityRegions/{id}")]
+        public async Task<IActionResult> GetCityWithRegions(int id)
+        {
+            var result = await _cityService.GetCityWithRegions(id);
+            return Ok(result);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(CityDTO cityDTO, int id)
         {
@@ -50,12 +57,7 @@ namespace BinaApp.Controllers
             return NoContent();
         }
 
-        [HttpGet("GetCityWithRegions/{id}")]
-        public async Task<IActionResult> GetCityWithRegions(int id)
-        {
-            var result = await _cityService.GetCityWithRegions(id);
-            return Ok(result);
-        }
+     
 
     }
 }
