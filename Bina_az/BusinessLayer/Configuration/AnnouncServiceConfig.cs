@@ -18,6 +18,7 @@ namespace BusinessLayer.Configuration
             services.AddScoped<IRegionService,RegionService>();
             services.AddScoped<ISettlementService,SettlementService>();
             services.AddScoped<ICategoryService,CategoryService>();
+            services.AddScoped<IAnnouncmentTypeService,AnnouncmentTypeService>();
             services.AddAutoMapper(typeof(MapperProfile));
         }
 

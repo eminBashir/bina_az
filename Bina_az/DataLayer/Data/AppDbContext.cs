@@ -12,6 +12,7 @@ namespace DataLayer.Data
         public DbSet<Region> Regions { get; set; }
         public DbSet<Settlement> Settlements { get; set; }
         public DbSet<Category> Categories { get; set; }
-       
+        public DbSet<AnnouncmentType> AnnouncmentTypes { get; set; }
+
     }
 }
