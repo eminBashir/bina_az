@@ -13,6 +13,7 @@ namespace DataLayer.Data
         public DbSet<Settlement> Settlements { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<AnnouncmentType> AnnouncmentTypes { get; set; }
+        public DbSet<Status> Statuses { get; set; }
 
     }
 }

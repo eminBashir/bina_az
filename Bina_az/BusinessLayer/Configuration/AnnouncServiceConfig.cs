@@ -19,6 +19,7 @@ namespace BusinessLayer.Configuration
             services.AddScoped<ISettlementService,SettlementService>();
             services.AddScoped<ICategoryService,CategoryService>();
             services.AddScoped<IAnnouncmentTypeService,AnnouncmentTypeService>();
+            services.AddScoped<IStatusService,StatusService>();
             services.AddAutoMapper(typeof(MapperProfile));
         }
 

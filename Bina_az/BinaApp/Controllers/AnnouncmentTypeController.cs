@@ -1,5 +1,5 @@
-﻿using BusinessLayer.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using BusinessLayer.DTO.AnnouncTypeDTO_s;
+using BusinessLayer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BinaApp.Controllers
@@ -15,6 +15,13 @@ namespace BinaApp.Controllers
             this.announcmentTypeService = announcmentTypeService;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create(AnnouncmentTypeDTO ancmntTypDto)
+        {
+            await announcmentTypeService.Create(ancmntTypDto);
+            return Ok(ancmntTypDto);
+        }
+
         [HttpGet("Get all")]
         public async Task<IActionResult> GetAll()
         {
@@ -27,6 +34,20 @@ namespace BinaApp.Controllers
         {
             var result = await announcmentTypeService.GetById(id);
             return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(AnnouncmentTypeDTO announcmentTypeDTO, int id)
+        {
+            await announcmentTypeService.Update(announcmentTypeDTO, id);
+            return Ok(announcmentTypeDTO);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await announcmentTypeService.Delete(id);
+            return Ok();
         }
     }
 }

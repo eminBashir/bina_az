@@ -5,6 +5,7 @@ using BusinessLayer.DTO.CategoryDTO_s;
 using BusinessLayer.DTO.CityDTO_s;
 using BusinessLayer.DTO.RegionDTO_s;
 using BusinessLayer.DTO.SettlementDTO_s;
+using BusinessLayer.DTO.StatusDTO_s;
 using DataLayer.Models;
 
 namespace BusinessLayer.Mapper
@@ -22,6 +23,7 @@ namespace BusinessLayer.Mapper
             CreateMap<Settlement, SettlementCreateDTO>().ReverseMap();
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<AnnouncmentType, AnnouncmentTypeDTO>().ReverseMap();
+            CreateMap<Status, StatusDTO>().ReverseMap();
         }
     }
 }

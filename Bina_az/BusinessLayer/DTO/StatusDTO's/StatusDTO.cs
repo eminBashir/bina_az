@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.Models
+namespace BusinessLayer.DTO.StatusDTO_s
 {
-    public class Status : BaseEntity
+    public class StatusDTO
     {
         public string Name { get; set; } = string.Empty;
     }

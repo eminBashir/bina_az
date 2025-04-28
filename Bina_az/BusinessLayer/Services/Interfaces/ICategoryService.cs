@@ -1,10 +1,4 @@
-﻿using BusinessLayer.DTO;
-using BusinessLayer.DTO.CategoryDTO_s;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BusinessLayer.DTO.CategoryDTO_s;
 
 namespace BusinessLayer.Services.Interfaces
 {
